@@ -1,5 +1,22 @@
 # Swap Meet
 
+# Pair Plan
+
+- JL and JM both on Eastern Time 
+- JL prefers to not Zoom after 6pm ET (chat anytime)
+
+Learning style:
+- JL and JM both like having time to explore problem first before coming together
+- JM prefers to check in before pushes, or document well if need to push before checking in 
+
+Feedback:
+- Assume positive intent
+- Nonviolent communication
+
+Communication to improve on: 
+- JL: letting there be silence
+- JM: talk out the code and be vocal about ideas; also interested in trying to use fewer words to explain ideas
+
 ## Skills Assessed
 
 - Following directions and reading comprehension
