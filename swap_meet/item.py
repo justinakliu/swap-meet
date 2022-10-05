@@ -7,7 +7,13 @@ class Item:
         return "Hello World!"
 
     def condition_description(self):
-        if self.condition > 0:
-            return "buy it"
+        if self.condition > 5:
+            return "wow"
+        elif self.condition > 4:
+            return "ooo"
+        elif self.condition > 3:
+            return "okay"
+        elif self.condition > 2:
+            return "eh"
         else:
-            return "nah"
+            return "meh"
