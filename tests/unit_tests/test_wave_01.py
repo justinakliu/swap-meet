@@ -3,11 +3,21 @@ import pytest
 from swap_meet.vendor import Vendor
 
 # @pytest.mark.skip
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 7afa756986e9309de2b99baa473ac7d4cd826dfb
 def test_vendor_has_inventory():
     vendor = Vendor()
     assert len(vendor.inventory) == 0
 
 # @pytest.mark.skip
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 7afa756986e9309de2b99baa473ac7d4cd826dfb
 def test_vendor_takes_optional_inventory():
     inventory = ["a", "b", "c"]
     vendor = Vendor(inventory=inventory)
@@ -17,6 +27,11 @@ def test_vendor_takes_optional_inventory():
     assert "c" in vendor.inventory
 
 # @pytest.mark.skip
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 7afa756986e9309de2b99baa473ac7d4cd826dfb
 def test_adding_to_inventory():
     vendor = Vendor()
     item = "new item"
@@ -27,6 +42,10 @@ def test_adding_to_inventory():
     assert item in vendor.inventory
     assert result == item
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7afa756986e9309de2b99baa473ac7d4cd826dfb
 # @pytest.mark.skip
 def test_removing_from_inventory_returns_item():
     item = "item to remove"
@@ -41,6 +60,11 @@ def test_removing_from_inventory_returns_item():
     assert result == item
 
 # @pytest.mark.skip
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> 7afa756986e9309de2b99baa473ac7d4cd826dfb
 def test_removing_not_found_is_false():
     item = "item to remove"
     vendor = Vendor(
@@ -53,7 +77,16 @@ def test_removing_not_found_is_false():
     assert item not in vendor.inventory
     assert result == False
 
+<<<<<<< HEAD
     # raise Exception("Complete this test according to comments below.")
+=======
+    assert not result
+    assert result == False
+    assert len(vendor.inventory) == 3
+    assert item not in vendor.inventory
+    # raise Exception("Complete this test according to comments below.")
+
+>>>>>>> 7afa756986e9309de2b99baa473ac7d4cd826dfb
     # *********************************************************************
     # ****** Complete Assert Portion of this test **********
     # *********************************************************************
