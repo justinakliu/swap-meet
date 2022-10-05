@@ -41,23 +41,16 @@ class Vendor:
         return True
 
     def get_best_by_category(self, category):
-        if not self.inventory:
-            return None
-        # filter inventory for category
-        # return max
-        candidates = [
-            item for item in self.inventory if item.category == category]
-
-        if not candidates:
-            return None
-
-        return max(candidates, key=lambda candidate: candidate.condition)
+        category_list = self.get_by_category(category)
+        if category_list:
+            category_list.sort(key=lambda item: item.condition, reverse=True)
+            return category_list[0]
+        return None
 
     def swap_best_by_category(self, other, my_priority, their_priority):
-        my_best_item = self.get_best_by_category(their_priority)
-        their_best_item = other.get_best_by_category(my_priority)
-        if not my_best_item or not their_best_item:
-            return False
-
-        self.swap_items(other, my_best_item, their_best_item)
-        return True
+        me = self.get_best_by_category(their_priority)
+        them = other.get_best_by_category(my_priority)
+        if me and them:
+            self.swap_items(other, me, them)
+            return True
+        return False
