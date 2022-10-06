@@ -47,10 +47,22 @@ class Vendor:
             category_list.sort(key=lambda item: item.condition, reverse=True)
             return category_list[0]
         return None
+    
     def swap_best_by_category(self, other, my_priority, their_priority):
         me = self.get_best_by_category(their_priority)
         them = other.get_best_by_category(my_priority)
         if me and them:
             self.swap_items(other, me, them)
+            return True
+        return False
+
+    def get_by_newest(self):
+        return min(self.inventory, key=lambda item: item.age)
+        
+    def swap_by_newest(self, other):
+        me = self.get_by_newest()
+        them = other.get_by_newest()
+        if me and them:
+            self.swap_items(other,me,them)
             return True
         return False
