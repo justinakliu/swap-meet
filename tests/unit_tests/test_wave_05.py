@@ -44,7 +44,7 @@ def test_items_have_condition_as_float():
 
 def test_items_have_condition_descriptions_that_are_the_same_regardless_of_type():
     items = [
-        Clothing(condition=5),
+        Clothing(condition=4.5),
         Decor(condition=5),
         Electronics(condition=5)
     ]

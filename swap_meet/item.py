@@ -1,9 +1,12 @@
 
+import math
+
 
 class Item:
     def __init__(self, category="", condition=0.0, age=0):
-        if not isinstance(category,str) or not isinstance(condition,(float,int)) or not isinstance(age,(float,int)):
-            raise TypeError("Invalid parameters. Please check category is string, condition is float and age is float")
+        if not isinstance(category, str) or not isinstance(condition, (float, int)) or not isinstance(age, (float, int)):
+            raise TypeError(
+                "Invalid parameters. Please check category is string, condition is float and age is float")
         self.category = category
         self.condition = condition
         self.age = age
@@ -12,9 +15,13 @@ class Item:
         return "Hello World!"
 
     def condition_description(self):
-        
-        self.condition=round(self.condition)
-        
+
+        # We need to round DOWN floats in order to pass test_wave_05: test 5, which YES, we altereed to test a theory Isabella had. If a float is used on the object that the assertion is testing, it will fail if rounded up from .6
+        if self.condition < 0:
+            self.condition = abs(self.condition)
+        self.condition = int(self.condition + .5)
+        if self.condition > 5:
+            self.condition = 5
         condition_dict = {
             0: "poor",
             1: "mhaa",
@@ -23,6 +30,7 @@ class Item:
             4: "YeahAaaa.",
             5: "GIMME!!!"
         }
+       
         return condition_dict[self.condition]
 
     # alternate implementation:
