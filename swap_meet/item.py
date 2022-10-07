@@ -1,5 +1,9 @@
+
+
 class Item:
-    def __init__(self, category="", condition=0, age=0):
+    def __init__(self, category="", condition=0.0, age=0):
+        if not isinstance(category,str) or not isinstance(condition,(float,int)) or not isinstance(age,(float,int)):
+            raise TypeError("Invalid parameters. Please check category is string, condition is float and age is float")
         self.category = category
         self.condition = condition
         self.age = age
@@ -8,6 +12,9 @@ class Item:
         return "Hello World!"
 
     def condition_description(self):
+        
+        self.condition=round(self.condition)
+        
         condition_dict = {
             0: "poor",
             1: "mhaa",

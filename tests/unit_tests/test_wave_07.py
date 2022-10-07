@@ -4,12 +4,9 @@ from swap_meet.clothing import Clothing
 from swap_meet.decor import Decor
 from swap_meet.electronics import Electronics
 from swap_meet.vendor import Vendor
-import time
 
 # `Item`s have age
-
 # Add an `age` attribute to all `Item`s
-
 # Implement a `Vendor` method named `swap_by_newest`, using any logic that seems appropriate
 
 # CLARIFYING QUESTIONS:
@@ -31,7 +28,7 @@ import time
 # @pytest.mark.skip
 def test_get_newest():
 
-# ARRANGE
+    # ARRANGE
     item_a = Clothing(age=5)
     item_b = Decor(age=19)
     item_c = Electronics(age=.5)
@@ -47,30 +44,134 @@ def test_get_newest():
     assert tai_newest == item_c
     assert jesse_newest == item_f
 
+
+# @pytest.mark.skip
+def test_swap_best_by_age():
+
+    item_a = Clothing(age=5)
+    item_b = Decor(age=19)
+    item_c = Electronics(age=.5)
+    tai = Vendor(inventory=[item_a, item_b, item_c])
+
+    item_d = Decor(age=123)
+    item_e = Electronics(age=33)
+    item_f = Clothing(age=9)
+    jesse = Vendor(inventory=[item_d, item_e, item_f])
+
+# Act
+    result = tai.swap_by_newest(
+        other=jesse)
+
+    # jesse would get item c
+    # tai would get item f
+    assert result == True
+    assert len(tai.inventory) == 3
+    assert len(jesse.inventory) == 3
+    assert item_a in tai.inventory
+    assert item_b in tai.inventory
+    assert item_c not in tai.inventory
+    assert item_c in jesse.inventory
+
+    assert item_d in jesse.inventory
+    assert item_e in jesse.inventory
+    assert item_f not in jesse.inventory
+    assert item_f in tai.inventory
+
+
+# @pytest.mark.skip
+def test_swap_by_newest_reordered():
+    # Arrange
+    item_a = Decor(age=2.0)
+    item_b = Electronics(age=4.0)
+    item_c = Decor(age=4.0)
+    tai = Vendor(
+        inventory=[item_c, item_b, item_a]
+    )
+
+    item_d = Clothing(age=2.0)
+    item_e = Decor(age=4.0)
+    item_f = Clothing(age=4.0)
+    jesse = Vendor(
+        inventory=[item_f, item_e, item_d]
+    )
+
+    # Act
+    result = tai.swap_by_newest(other=jesse)
+
+    # jesse gets item c
+    # tai gets
+    assert result
+    assert len(tai.inventory) == 3
+    assert len(jesse.inventory) == 3
+    assert item_a not in tai.inventory
+    assert item_a in jesse.inventory
+    assert item_b in tai.inventory
+    assert item_c in tai.inventory
+
+    assert item_d not in jesse.inventory
+    assert item_d in tai.inventory
+    assert item_e in jesse.inventory
+    assert item_f in jesse.inventory
+
+
+# @pytest.mark.skip
+def test_swap_best_by_category_no_inventory_is_false():
+    tai = Vendor(
+        inventory=[]
+    )
+
+    item_a = Clothing(age=2.0)
+    item_b = Decor(age=4.0)
+    item_c = Clothing(age=4.0)
+    jesse = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    result = jesse.get_by_newest()
+    result = tai.get_by_newest()
+
+    assert not result
+    assert len(tai.inventory) == 0
+    assert len(jesse.inventory) == 3
+    assert item_a in jesse.inventory
+    assert item_b in jesse.inventory
+    assert item_c in jesse.inventory
+
+
+# @pytest.mark.skip
+def test_swap_best_by_category_no_other_inventory_is_false():
+    item_a = Clothing(age=2.0)
+    item_b = Decor(age=4.0)
+    item_c = Clothing(age=4.0)
+    tai = Vendor(
+        inventory=[item_a, item_b, item_c]
+    )
+
+    jesse = Vendor(
+        inventory=[])
+
+    result = tai.swap_by_newest(jesse)
+
+    assert result == None
+    assert len(tai.inventory) == 3
+    assert len(jesse.inventory) == 0
+
+
 @pytest.mark.skip
-def test_pass_valid_age_in():
+def test_return_false_invalid_age():
     pass
 # ARRANGE
-    Variable = 77
-    item_a = Clothing(age=None)
-    item_b = Decor(age="5")
-    item_c = Electronics(age=".5")
-    item_d = Decor(age="Hello!")
-    item_e = Electronics(age=None)
-    item_f = Clothing(age=Variable)
+    item_a = Clothing(age=".5")
+    item_b = Decor(age="hiya")
+    item_c = Electronics(age=None)
+    item_d = Decor(age="5")
+    item_e = Electronics(age="!$*")
+    item_f = Clothing(age=None)
     tai = Vendor(inventory=[item_a, item_b, item_c])
     jesse = Vendor(inventory=[item_d, item_e, item_f])
 # ACT
-    tai = tai.swap_by_age()
-    jesse = jesse.swap_by_age()
+    tai_newest = tai.get_by_newest()
+    jesse_newest = jesse.get_by_newest()
 # ASSERT
-     
-
-@pytest.mark.skip
-def test_get_swap_by_age():
-    pass
-# ARRANGE
-
-# ACT
-
-# ASSERT
+    assert tai_newest == None  # with pytest raises
+    assert jesse_newest == False
